@@ -36,7 +36,7 @@ class _DataEditingPageState extends State<DataEditingPage> {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.blueGrey,
-                fontFamily: Constants.fontFamilyText,
+                fontFamily: Constants.fontFamilyName,
                 letterSpacing: 1.5,
               ),
             ),

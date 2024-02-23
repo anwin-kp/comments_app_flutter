@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Padding(
               padding: EdgeInsets.only(bottom: 10.0),
               child: SpinKitPouringHourGlass(
-                color: kColorWhite,
+                color: AppColors.kColorWhite,
                 strokeWidth: 1,
                 size: 80,
               ),

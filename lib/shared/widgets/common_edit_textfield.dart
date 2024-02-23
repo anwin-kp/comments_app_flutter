@@ -1,3 +1,4 @@
+import 'package:firebase_complete_demo_app/shared/helper/common_text_styles.dart';
 import 'package:firebase_complete_demo_app/viewmodels/custom_text_field_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,18 +44,18 @@ class CustomTextFormField extends StatelessWidget {
                 isDense: false,
                 alignLabelWithHint: true,
                 labelText: labelText,
+                labelStyle: CommonTextStyles.textInputLabelStyleW500,
                 counterText: "",
                 filled: false,
                 isCollapsed: false,
                 hintText: hintText,
-                hintStyle: const TextStyle(color: Colors.grey),
+                hintStyle: CommonTextStyles.hintTextStyleW300,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 floatingLabelBehavior: FloatingLabelBehavior.auto,
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                labelStyle: const TextStyle(color: Colors.blue),
                 errorStyle: Constants.errorTextStyle,
                 focusedBorder: Constants.focusedInputBorder,
                 enabledBorder: Constants.enabledInputBorder,

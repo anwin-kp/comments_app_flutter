@@ -23,7 +23,7 @@ class TextBold extends StatelessWidget {
       style: TextStyle(
         color: textColor,
         fontWeight: FontWeight.w700,
-        fontFamily: Constants.fontFamilyText,
+        fontFamily: Constants.fontFamilyName,
         fontSize: fontSize,
         decoration:
             isUnderLine ? TextDecoration.underline : TextDecoration.none,
@@ -54,7 +54,7 @@ class TextExtraBold extends StatelessWidget {
       style: TextStyle(
         color: textColor,
         fontWeight: FontWeight.w800,
-        fontFamily: Constants.fontFamilyText,
+        fontFamily: Constants.fontFamilyName,
         fontSize: fontSize,
         decoration:
             isUnderLine ? TextDecoration.underline : TextDecoration.none,
@@ -87,7 +87,7 @@ class TextMedium extends StatelessWidget {
       style: TextStyle(
         overflow: wantOverFlowEllipsis ? TextOverflow.ellipsis : null,
         color: textColor,
-        fontFamily: Constants.fontFamilyText,
+        fontFamily: Constants.fontFamilyName,
         fontWeight: FontWeight.w500,
         fontSize: fontSize,
         decoration:
@@ -117,7 +117,7 @@ class TextSmall extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontFamily: Constants.fontFamilyText,
+        fontFamily: Constants.fontFamilyName,
         fontWeight: FontWeight.w300,
         fontSize: fontSize,
         decoration:
@@ -149,7 +149,7 @@ class TextNormal extends StatelessWidget {
       style: TextStyle(
         color: textColor,
         fontWeight: FontWeight.w400,
-        fontFamily: Constants.fontFamilyText,
+        fontFamily: Constants.fontFamilyName,
         fontSize: fontSize,
         decoration: TextDecoration.none,
       ),
@@ -180,7 +180,7 @@ class TextSemiBold extends StatelessWidget {
       style: TextStyle(
         color: textColor,
         fontWeight: FontWeight.w600,
-        fontFamily: Constants.fontFamilyText,
+        fontFamily: Constants.fontFamilyName,
         fontSize: fontSize,
         decoration:
             isUnderLine ? TextDecoration.underline : TextDecoration.none,

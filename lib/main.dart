@@ -1,5 +1,7 @@
 import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +13,11 @@ import 'views/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
+  LicenseRegistry.addLicense(() async* {
+    final license =
+        await rootBundle.loadString('assets/fonts/roboto/LICENSE.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
   runApp(const MyApp());
 }
 
@@ -44,7 +50,7 @@ class MyApp extends StatelessWidget {
           title: Constants.appTitleText,
           theme: ThemeData(
             useMaterial3: true,
-            indicatorColor: kLiteBlueColor,
+            indicatorColor: AppColors.kLiteBlueColor,
           ),
           home: const SplashScreen(),
         ),

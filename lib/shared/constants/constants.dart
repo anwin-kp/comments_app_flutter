@@ -8,7 +8,7 @@ class Constants {
   static const Size kGlobalSize = Size(360, 690);
   static const String appTitleText = 'Flutter MQTT Demo';
   static const String homeTitleText = 'Flutter MQTT';
-  static const String fontFamilyText = 'Roboto';
+  static const String fontFamilyName = 'Roboto';
 
   //! MQTT Data Constants
   static const int kMQTTWaitTimeInSecond = 5;
@@ -18,17 +18,19 @@ class Constants {
   static const String kMQTTPassword = '123456';
   static const String kMQTTIdentifierPrefix = 'mqttx_cb7c781a-';
 
-  //! Common Constants
-  static const String mqttDataUpdatedSuccessText = 'Data Updated Successfully';
-  static const String updateCapsText = 'UPDATE';
-  static const String taskInProgressText = 'task_inprogress';
-  static const String taskFailedText = 'task_failed';
-  static const String taskCompletedText = 'task_completed';
-  static const String countText = 'count';
+  //! Login Page constants
   static const String emailText = 'Email';
   static const String passwordText = 'Password';
   static const String enterYourEmailText = 'Enter your email';
   static const String enterPasswordText = 'Enter your password';
+  static const String orSignInWithText = 'Or Sign In with';
+
+  //! Data Edit Page Constants
+  static const String mqttDataUpdatedSuccessText = 'Data Updated Successfully';
+  static const String taskInProgressText = 'task_inprogress';
+  static const String taskFailedText = 'task_failed';
+  static const String taskCompletedText = 'task_completed';
+  static const String countText = 'count';
   static const String messageText = 'message';
   static const String taskCompletedCapsText = 'Task Completed';
   static const String minsAgoText = 'mins ago';
@@ -43,6 +45,9 @@ class Constants {
       'Hello, MQTT! Update From Flutter App';
   static const String updatesStatusCountText =
       'You have updated the status this many times:';
+
+  //!Common Texts
+  static const String updateCapsText = 'UPDATE';
 
   //! Error Texts
   static const String fieldCantBeEmptyText = 'This field can\'t be empty';
@@ -63,12 +68,12 @@ class Constants {
         fontWeight: FontWeight.w500,
       );
   static OutlineInputBorder get focusedInputBorder => OutlineInputBorder(
-        borderSide: const BorderSide(color: kGreenColorText),
+        borderSide: const BorderSide(color: AppColors.kGreenColorText),
         borderRadius: BorderRadius.circular(10),
       );
 
   static OutlineInputBorder get enabledInputBorder => OutlineInputBorder(
-        borderSide: const BorderSide(color: kLiteBlueColor),
+        borderSide: const BorderSide(color: AppColors.kLiteBlueColor),
         borderRadius: BorderRadius.circular(10),
       );
 
