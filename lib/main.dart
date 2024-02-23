@@ -1,3 +1,4 @@
+import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           title: Constants.appTitleText,
           theme: ThemeData(
             useMaterial3: true,
+            indicatorColor: kLiteBlueColor,
           ),
           home: const SplashScreen(),
         ),

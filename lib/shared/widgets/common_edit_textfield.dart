@@ -30,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
         return Container(
           padding: EdgeInsets.only(top: 4.h),
           child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: controller,
             validator: (value) => validator != null ? validator!(value) : null,
             obscureText: isPassword ? textFieldState.obscureText : false,

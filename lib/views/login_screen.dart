@@ -29,7 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
           extendBody: true,
           extendBodyBehindAppBar: true,
           body: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
