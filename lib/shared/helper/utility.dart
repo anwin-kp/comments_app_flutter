@@ -46,6 +46,8 @@ class Utility {
       return Constants.enterMobileNumberText;
     } else if (!regExp.hasMatch(value)) {
       return Constants.enterValidMobileNumberText;
+    } else if (value.length != 10) {
+      return Constants.mobileNumberShouldBe10Text;
     }
     return null;
   }

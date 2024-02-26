@@ -1,4 +1,6 @@
+import 'package:firebase_complete_demo_app/firebase_options.dart';
 import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,8 +13,11 @@ import 'viewmodels/dependency_change_view_model.dart';
 import 'viewmodels/home_viewmodel.dart';
 import 'views/splash_screen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   LicenseRegistry.addLicense(() async* {
     final license =
         await rootBundle.loadString('assets/fonts/roboto/LICENSE.txt');

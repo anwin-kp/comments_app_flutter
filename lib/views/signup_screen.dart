@@ -20,6 +20,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _mobileNumController = TextEditingController();
   final GlobalKey<FormState> _signupFormKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -76,6 +77,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       hintText: Constants.enterYourEmailText,
                       validator: (value) {
                         return _utility.validateEmail(value!);
+                      },
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    CustomTextFormField(
+                      controller: _mobileNumController,
+                      textInputType: TextInputType.phone,
+                      isPassword: false,
+                      labelText: Constants.phoneNumberText,
+                      hintText: Constants.enterPhoneNumberText,
+                      validator: (value) {
+                        return _utility.validateMobile(value!);
                       },
                     ),
                     SizedBox(

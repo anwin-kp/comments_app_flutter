@@ -18,6 +18,8 @@ dependencies:
   flutter_spinkit: ^5.2.0
   google_fonts: ^6.1.0
   double_back_to_close_app: ^2.1.0
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
 
 dev_dependencies:
   flutter_test:

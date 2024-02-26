@@ -34,8 +34,10 @@ class Constants {
   static const String privacyTitle3Text = '  and';
   static const String privacyTitle4Text = ' Conditions of Use';
 
-  //! Login Page constants
+  //! Sign Up Page constants
   static const String nameText = 'Name';
+  static const String phoneNumberText = 'Phone Number';
+  static const String enterPhoneNumberText = 'Enter your phone number';
   static const String enterYourNameText = 'Enter your name';
   static const String confirmPasswordText = 'Confirm Password';
   static const String orSignUpWithText = 'Or Sign Up with';
@@ -70,6 +72,8 @@ class Constants {
   static const String fieldCantBeEmptyText = 'This field can\'t be empty';
   static const String enterValidMobileNumberText =
       'Please enter valid mobile number';
+  static const String mobileNumberShouldBe10Text =
+      'Phone number should be 10 digits';
   static const String valueCannotBeEmpty = 'Value cannot be empty';
   static const String enterValidEmailText = 'Please enter a valid email';
   static const String enterEmailText = 'Please enter an email';
