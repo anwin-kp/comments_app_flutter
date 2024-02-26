@@ -1,6 +1,6 @@
+import 'package:firebase_complete_demo_app/shared/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/colors.dart';
 
@@ -8,18 +8,21 @@ import '../constants/colors.dart';
 class CommonTextStyles {
   CommonTextStyles._();
 
-  static TextStyle textStyleW500 = GoogleFonts.roboto(
+  static TextStyle textStyleW500 = TextStyle(
     color: Colors.black,
+    fontFamily: Constants.fontFamilyName,
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle hintTextStyleW300 = GoogleFonts.roboto(
+  static TextStyle hintTextStyleW300 = TextStyle(
     color: AppColors.kHintTextGreyColor,
+    fontFamily: Constants.fontFamilyName,
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle textInputLabelStyleW500 = GoogleFonts.roboto(
+  static TextStyle textInputLabelStyleW500 = TextStyle(
     color: AppColors.kColorLightBlue,
+    fontFamily: Constants.fontFamilyName,
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,
   );

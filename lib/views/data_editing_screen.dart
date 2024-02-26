@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../shared/constants/constants.dart';
 import '../shared/helper/utility.dart';
 import '../viewmodels/home_viewmodel.dart';
-import '../shared/widgets/common_edit_textfield.dart';
-import '../shared/widgets/gradient_button.dart';
+import '../shared/widgets/common widgets/common_edit_textfield.dart';
+import '../shared/widgets/common widgets/common_gradient_button.dart';
 
 class DataEditingPage extends StatefulWidget {
   const DataEditingPage({Key? key}) : super(key: key);

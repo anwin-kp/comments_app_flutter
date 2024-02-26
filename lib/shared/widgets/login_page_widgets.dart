@@ -1,4 +1,6 @@
+import 'package:firebase_complete_demo_app/shared/widgets/common%20widgets/common_text_types.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/colors.dart';
 
@@ -73,18 +75,21 @@ class PrimaryTextButton extends StatelessWidget {
       {super.key,
       required this.onPressed,
       required this.title,
-      required this.textStyle});
+      required this.fontSize});
   final Function() onPressed;
   final String title;
-  final TextStyle textStyle;
+  final int fontSize;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: Text(
-        title,
-        style: textStyle,
+      child: TextMedium(
+        text: title,
+        fontSize: fontSize.sp,
+        isUnderLine: false,
+        textColor: AppColors.kColorBlack,
+        wantOverFlowEllipsis: false,
       ),
     );
   }

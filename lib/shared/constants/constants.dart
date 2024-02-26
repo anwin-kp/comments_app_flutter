@@ -19,11 +19,28 @@ class Constants {
   static const String kMQTTIdentifierPrefix = 'mqttx_cb7c781a-';
 
   //! Login Page constants
+  static const String loginText = 'Login';
   static const String emailText = 'Email';
   static const String passwordText = 'Password';
+  static const String signUpText = 'Sign Up';
+  static const String forgotPasswordText = 'Forgot Password?';
+  static const String continueWithGoogleText = 'Continue with Google';
   static const String enterYourEmailText = 'Enter your email';
   static const String enterPasswordText = 'Enter your password';
   static const String orSignInWithText = 'Or Sign In with';
+  static const String dontHaveAnAccountText = 'Don’t have an account? ';
+  static const String privacyTitle1Text = '  By signing up you agree to our';
+  static const String privacyTitle2Text = ' Terms ';
+  static const String privacyTitle3Text = '  and';
+  static const String privacyTitle4Text = ' Conditions of Use';
+
+  //! Login Page constants
+  static const String nameText = 'Name';
+  static const String enterYourNameText = 'Enter your name';
+  static const String confirmPasswordText = 'Confirm Password';
+  static const String orSignUpWithText = 'Or Sign Up with';
+  static const String enterNewPasswordText = 'Enter new password';
+  static const String confirmNewPasswordText = 'Confirm new password';
 
   //! Data Edit Page Constants
   static const String mqttDataUpdatedSuccessText = 'Data Updated Successfully';
@@ -60,6 +77,7 @@ class Constants {
   static const String enterLoginPasswordText = "Please enter a password";
   static const String enterValidPasswordText =
       "Password must be atleast 6 characters long";
+  static const String exitWarningText = 'Press back again to exit.';
 
   //!Error Styles
   static TextStyle get errorTextStyle => TextStyle(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
+import '../../constants/constants.dart';
 
 // Custom Text widget with bold style.
 class TextBold extends StatelessWidget {

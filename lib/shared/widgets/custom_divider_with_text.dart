@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
-import 'custom_text_types.dart';
+import 'common widgets/common_text_types.dart';
 
 class TextWithDivider extends StatelessWidget {
   final String textToShow;
