@@ -1,5 +1,6 @@
 import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 import 'package:firebase_complete_demo_app/shared/helper/app_images.dart';
+import 'package:firebase_complete_demo_app/shared/helper/route.dart';
 import 'package:firebase_complete_demo_app/viewmodels/custom_text_field_view_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _passwordController = TextEditingController();
   final Utility _utility = Utility();
 
   @override
@@ -120,7 +121,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   TextSpan(
                                     text: 'Sign Up',
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = () {},
+                                      ..onTap = () {
+                                        Navigator.push(
+                                          context,
+                                          createSignupScreenRoute(),
+                                        );
+                                      },
                                     style: GoogleFonts.roboto(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w700,
@@ -145,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 35.w),
                               child: SecondaryButton(
-                                  height: 45.h,
+                                  height: 50.h,
                                   textColor: AppColors.kGrey600,
                                   width: 220.w,
                                   onTap: () {},

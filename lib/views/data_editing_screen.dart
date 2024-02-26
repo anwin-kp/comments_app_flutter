@@ -16,12 +16,14 @@ class DataEditingPage extends StatefulWidget {
 }
 
 class _DataEditingPageState extends State<DataEditingPage> {
-  final Utility _utility = Utility();
   final TextEditingController _taskCompletedController =
       TextEditingController();
+
   final TextEditingController _taskFailedController = TextEditingController();
   final TextEditingController _taskInProgressController =
       TextEditingController();
+
+  final Utility _utility = Utility();
 
   @override
   Widget build(BuildContext context) {
