@@ -1,12 +1,12 @@
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_complete_demo_app/firebase_options.dart';
 import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'shared/constants/constants.dart';
@@ -23,12 +23,14 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.instance;
-  firebaseAppCheck.activate(
-    androidProvider: AndroidProvider.debug,
-  );
-  // ignore: avoid_print
-  firebaseAppCheck.getToken().then((value) => print(value.toString()));
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   LicenseRegistry.addLicense(() async* {
     final license =
         await rootBundle.loadString('assets/fonts/roboto/LICENSE.txt');
@@ -59,8 +61,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<TextFieldProvider>(
             create: (_) => TextFieldProvider(),
           ),
-          ChangeNotifierProvider<LoginViewModel>(
-            create: (_) => LoginViewModel(),
+          ChangeNotifierProvider<Retrieves>(
+            create: (_) => Retrieves(),
           ),
           ChangeNotifierProvider<SignUpViewModel>(
             create: (_) => SignUpViewModel(),

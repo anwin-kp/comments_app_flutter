@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1044351844242",
+    "firebase_url": "https://fir-complete-demo-19b60-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "fir-complete-demo-19b60",
     "storage_bucket": "fir-complete-demo-19b60.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.firebase_complete_demo_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1044351844242-g5quidbidp9vij3rb5rkjr1kklpkb0sm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebase_complete_demo_app",
+            "certificate_hash": "c7dede7b096d3c7b2f562bae5b0b909ca419bc8d"
+          }
+        },
+        {
+          "client_id": "1044351844242-a8vi6ojdh2dc82mah46nmjk0gto48n9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC7GdaADZgTxnNnFTM0bvRmSnaMvJGj2-E"
@@ -20,7 +34,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044351844242-a8vi6ojdh2dc82mah46nmjk0gto48n9a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1044351844242-0cb1tca8d02kamlse7h7ijua7ui32ut3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseCompleteDemoApp"
+              }
+            }
+          ]
         }
       }
     }

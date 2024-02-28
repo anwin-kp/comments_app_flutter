@@ -55,6 +55,8 @@ class DefaultFirebaseOptions {
     appId: '1:1044351844242:android:2d445541dc749af0490b4b',
     messagingSenderId: '1044351844242',
     projectId: 'fir-complete-demo-19b60',
+    databaseURL:
+        'https://fir-complete-demo-19b60-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fir-complete-demo-19b60.appspot.com',
   );
 
@@ -63,7 +65,13 @@ class DefaultFirebaseOptions {
     appId: '1:1044351844242:ios:34ab3da0f0968500490b4b',
     messagingSenderId: '1044351844242',
     projectId: 'fir-complete-demo-19b60',
+    databaseURL:
+        'https://fir-complete-demo-19b60-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fir-complete-demo-19b60.appspot.com',
+    androidClientId:
+        '1044351844242-g5quidbidp9vij3rb5rkjr1kklpkb0sm.apps.googleusercontent.com',
+    iosClientId:
+        '1044351844242-0cb1tca8d02kamlse7h7ijua7ui32ut3.apps.googleusercontent.com',
     iosBundleId: 'com.example.firebaseCompleteDemoApp',
   );
 }

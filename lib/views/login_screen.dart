@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<TextFieldProvider, LoginViewModel>(
+    return Consumer2<TextFieldProvider, Retrieves>(
       builder: (context, textFieldProvider, loginViewModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: true,

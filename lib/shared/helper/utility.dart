@@ -42,6 +42,15 @@ class Utility {
     return null;
   }
 
+  String? validateConfirmPassword(String value, String originalPassword) {
+    if (value.isEmpty) {
+      return 'Please confirm your password';
+    } else if (value != originalPassword) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
   String? validateMobile(String value) {
     RegExp regExp = RegExp(Constants.mobileRegex);
     if (value.isEmpty) {
@@ -97,7 +106,7 @@ class Utility {
         wantOverFlowEllipsis: false,
       ),
       backgroundColor: Colors.red,
-      behavior: SnackBarBehavior.floating,
+      behavior: SnackBarBehavior.fixed,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
