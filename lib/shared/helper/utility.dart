@@ -1,7 +1,9 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:firebase_complete_demo_app/shared/widgets/common%20widgets/common_text_types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../constants/colors.dart';
 import '../constants/constants.dart';
 
 class Utility {
@@ -83,5 +85,24 @@ class Utility {
       borderColor: Colors.lightGreen,
       borderWidth: 1,
     )..show(context);
+  }
+
+  showErrorSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: TextMedium(
+        text: message,
+        fontSize: 14.sp,
+        isUnderLine: false,
+        textColor: AppColors.kColorWhite,
+        wantOverFlowEllipsis: false,
+      ),
+      backgroundColor: Colors.red,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

@@ -3,6 +3,7 @@ import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 import 'package:firebase_complete_demo_app/shared/helper/app_images.dart';
 import 'package:firebase_complete_demo_app/shared/helper/route.dart';
 import 'package:firebase_complete_demo_app/viewmodels/custom_text_field_view_model.dart';
+import 'package:firebase_complete_demo_app/viewmodels/login_viewmodel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ import '../shared/widgets/common widgets/common_edit_textfield.dart';
 import '../shared/widgets/common widgets/common_elevated_button.dart';
 import '../shared/widgets/common widgets/common_text_types.dart';
 import '../shared/widgets/custom_divider_with_text.dart';
+import '../shared/widgets/custom_overlay_loader.dart';
 import '../shared/widgets/login_page_widgets.dart';
 import '../shared/widgets/secondary_button.dart';
 
@@ -32,155 +34,171 @@ class _LoginScreenState extends State<LoginScreen> {
   final Utility _utility = Utility();
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Consumer<TextFieldProvider>(
-      builder: (context, value, child) {
+    return Consumer2<TextFieldProvider, LoginViewModel>(
+      builder: (context, textFieldProvider, loginViewModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: true,
           extendBody: false,
           extendBodyBehindAppBar: false,
-          body: DoubleBackToCloseApp(
-            snackBar: const SnackBar(
-              content: TextNormal(
-                  text: Constants.exitWarningText,
-                  textColor: AppColors.kColorWhite,
-                  fontSize: 12),
-            ),
-            child: GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 220.h,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Form(
-                          key: _loginFormKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              CustomTextFormField(
-                                controller: _emailController,
-                                textInputType: TextInputType.emailAddress,
-                                isPassword: false,
-                                labelText: Constants.emailText,
-                                hintText: Constants.enterYourEmailText,
-                                validator: (value) {
-                                  return _utility.validateEmail(value!);
-                                },
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              CustomTextFormField(
-                                controller: _passwordController,
-                                textInputType: TextInputType.visiblePassword,
-                                isPassword: true,
-                                labelText: Constants.passwordText,
-                                hintText: Constants.enterPasswordText,
-                                validator: (value) {
-                                  return _utility.validatePassword(value!);
-                                },
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  PrimaryTextButton(
-                                    onPressed: () {},
-                                    title: Constants.forgotPasswordText,
-                                    fontSize: 14,
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              CommonButton(
-                                text: Constants.loginText,
-                                onPressed: () {
-                                  if (_loginFormKey.currentState!.validate()) {}
-                                },
-                                backgroundColor: AppColors.kLiteBlueColor,
-                                textColor: AppColors.kColorWhite,
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  text: Constants.dontHaveAnAccountText,
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.kGrey600),
+          body: LoadingOverlay(
+            isLoading: loginViewModel.loading,
+            child: DoubleBackToCloseApp(
+              snackBar: const SnackBar(
+                content: TextNormal(
+                    text: Constants.exitWarningText,
+                    textColor: AppColors.kColorWhite,
+                    fontSize: 12),
+              ),
+              child: GestureDetector(
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 220.h,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Form(
+                            key: _loginFormKey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                CustomTextFormField(
+                                  controller: _emailController,
+                                  textInputType: TextInputType.emailAddress,
+                                  isPassword: false,
+                                  labelText: Constants.emailText,
+                                  hintText: Constants.enterYourEmailText,
+                                  validator: (value) {
+                                    return _utility.validateEmail(value!);
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                CustomTextFormField(
+                                  controller: _passwordController,
+                                  textInputType: TextInputType.visiblePassword,
+                                  isPassword: true,
+                                  labelText: Constants.passwordText,
+                                  hintText: Constants.enterPasswordText,
+                                  validator: (value) {
+                                    return _utility.validatePassword(value!);
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    TextSpan(
-                                      text: Constants.signUpText,
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.push(
-                                            context,
-                                            createSignupScreenRoute(),
-                                          );
-                                        },
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                          color: AppColors.kLiteBlueColor),
-                                    ),
+                                    PrimaryTextButton(
+                                      onPressed: () {},
+                                      title: Constants.forgotPasswordText,
+                                      fontSize: 14,
+                                    )
                                   ],
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 5.0.w),
-                                child: const TextWithDivider(
-                                  textToShow: Constants.orSignInWithText,
+                                SizedBox(
+                                  height: 10.h,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 35.w),
-                                child: SecondaryButton(
-                                    height: 50.h,
-                                    textColor: AppColors.kGrey600,
-                                    width: 220.w,
-                                    onTap: () {},
-                                    borderRadius: 24,
-                                    bgColor:
-                                        AppColors.kBackground.withOpacity(0.3),
-                                    text: Constants.continueWithGoogleText,
-                                    icons: AppImages.kGoogle),
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 40),
-                                child: TermsAndPrivacyText(
-                                  title1: Constants.privacyTitle1Text,
-                                  title2: Constants.privacyTitle2Text,
-                                  title3: Constants.privacyTitle3Text,
-                                  title4: Constants.privacyTitle4Text,
+                                CommonButton(
+                                  text: Constants.loginText,
+                                  onPressed: () {
+                                    if (_loginFormKey.currentState!
+                                        .validate()) {
+                                      loginViewModel.signIn(
+                                          _emailController.text.trim(),
+                                          _passwordController.text.trim());
+                                    }
+                                  },
+                                  backgroundColor: AppColors.kLiteBlueColor,
+                                  textColor: AppColors.kColorWhite,
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: Constants.dontHaveAnAccountText,
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColors.kGrey600),
+                                    children: [
+                                      TextSpan(
+                                        text: Constants.signUpText,
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.push(
+                                              context,
+                                              createSignupScreenRoute(),
+                                            );
+                                          },
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700,
+                                            color: AppColors.kLiteBlueColor),
+                                      ),
+                                    ],
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 5.0.w),
+                                  child: const TextWithDivider(
+                                    textToShow: Constants.orSignInWithText,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 35.w),
+                                  child: SecondaryButton(
+                                      height: 50.h,
+                                      textColor: AppColors.kGrey600,
+                                      width: 220.w,
+                                      onTap: () {},
+                                      borderRadius: 24,
+                                      bgColor: AppColors.kBackground
+                                          .withOpacity(0.3),
+                                      text: Constants.continueWithGoogleText,
+                                      icons: AppImages.kGoogle),
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 40),
+                                  child: TermsAndPrivacyText(
+                                    title1: Constants.privacyTitle1Text,
+                                    title2: Constants.privacyTitle2Text,
+                                    title3: Constants.privacyTitle3Text,
+                                    title4: Constants.privacyTitle4Text,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
