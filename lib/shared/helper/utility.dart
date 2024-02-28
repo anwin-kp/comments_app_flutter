@@ -70,6 +70,21 @@ class Utility {
     return null;
   }
 
+  String getErrorMessageToShow(String errorCode) {
+    switch (errorCode) {
+      case 'user-not-found':
+        return "No user found with this email. Please try again.";
+      case 'wrong-password':
+        return "Incorrect password. Please try again.";
+      case 'too-many-requests':
+        return "Too many requests. Please try again later.";
+      case 'invalid-credential':
+        return "The email or password is incorrect. Please try again.";
+      default:
+        return "An error occurred during sign-in. Please try again later.";
+    }
+  }
+
   //FlushBar to show successful messages
   Flushbar showDoneFlushbar(String textToShow, BuildContext context) {
     return Flushbar(

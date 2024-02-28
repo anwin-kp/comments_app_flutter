@@ -44,27 +44,14 @@ class Retrieves extends ChangeNotifier {
       await retrieveData();
     }, onError: (error) {
       setLoading(false);
+      String errorMessage;
       if (error is FirebaseAuthException) {
-        if (error.code == 'user-not-found') {
-          Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
-              "No user found with this email. Please try again.");
-        } else if (error.code == 'wrong-password') {
-          Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
-              "Incorrect password. Please try again.");
-        } else if (error.code == 'too-many-requests') {
-          Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
-              "Too many requests. Please try again later.");
-        } else if (error.code == 'invalid-credential') {
-          Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
-              "The email or password is incorrect. Please try again.");
-        } else {
-          Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
-              "An error occurred during sign-in. Please try again later.");
-        }
+        errorMessage = Utility().getErrorMessageToShow(error.code);
       } else {
-        Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
-            "An unexpected error occurred. Please try again later.");
+        errorMessage = "An unexpected error occurred. Please try again later.";
       }
+      Utility()
+          .showErrorSnackBar(appNavigatorKey.currentContext!, errorMessage);
     });
 
     notifyListeners();
