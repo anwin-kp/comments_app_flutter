@@ -61,8 +61,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<TextFieldProvider>(
             create: (_) => TextFieldProvider(),
           ),
-          ChangeNotifierProvider<Retrieves>(
-            create: (_) => Retrieves(),
+          ChangeNotifierProvider<LoginViewModel>(
+            create: (_) => LoginViewModel(),
           ),
           ChangeNotifierProvider<SignUpViewModel>(
             create: (_) => SignUpViewModel(),

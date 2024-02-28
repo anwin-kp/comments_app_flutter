@@ -162,7 +162,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               height: 50.h,
                               textColor: AppColors.kGrey600,
                               width: 220.w,
-                              onTap: () {},
+                              onTap: () {
+                                signUpViewModel.signUpWithGoogle();
+                              },
                               borderRadius: 24,
                               bgColor: AppColors.kBackground.withOpacity(0.3),
                               text: Constants.continueWithGoogleText,

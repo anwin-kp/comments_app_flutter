@@ -70,7 +70,7 @@ class Utility {
     return null;
   }
 
-  String getErrorMessageToShow(String errorCode) {
+  String getLoginErrorMessageToShow(String errorCode) {
     switch (errorCode) {
       case 'user-not-found':
         return "No user found with this email. Please try again.";

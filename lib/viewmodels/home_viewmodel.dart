@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../main.dart';
 import '../models/mqtt_response_model.dart';
 import '../models/user_model.dart';
@@ -12,7 +11,7 @@ import '../shared/services/mqtt_repo.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final Utility _utility = Utility();
-  User user = User(
+  User _user = User(
       name: "Alexander",
       email: "Alexander@gmail.com",
       imageUrl: AppImages.userImage);
@@ -22,6 +21,7 @@ class HomeViewModel extends ChangeNotifier {
 
   MqttResponseModel get mqttResponse => _mqttResponse;
   bool get loading => _loading;
+  User get user => _user;
   int get counter => _counter;
   late MqttRepository _mqttRepository;
 
@@ -31,6 +31,12 @@ class HomeViewModel extends ChangeNotifier {
   }
   void setLoading(bool value) {
     _loading = value;
+    notifyListeners();
+  }
+
+  void updateUser(String name, String email) {
+    _user.name = name;
+    _user.email = email;
     notifyListeners();
   }
 

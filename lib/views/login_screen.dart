@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<TextFieldProvider, Retrieves>(
+    return Consumer2<TextFieldProvider, LoginViewModel>(
       builder: (context, textFieldProvider, loginViewModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: true,
@@ -174,7 +174,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       height: 50.h,
                                       textColor: AppColors.kGrey600,
                                       width: 220.w,
-                                      onTap: () {},
+                                      onTap: () {
+                                        loginViewModel.signInWithGoogle();
+                                      },
                                       borderRadius: 24,
                                       bgColor: AppColors.kBackground
                                           .withOpacity(0.3),

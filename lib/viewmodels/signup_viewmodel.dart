@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 import '../shared/helper/route.dart';
 import '../shared/helper/utility.dart';
+import 'home_viewmodel.dart';
 
 class SignUpViewModel extends ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -32,7 +35,8 @@ class SignUpViewModel extends ChangeNotifier {
       await FirebaseFirestore.instance
           .collection('/Users')
           .doc(userCredential.user?.uid)
-          .set({'Name': name, 'Mobile Number': phoneNumber});
+          .set(
+              {'Name': name, 'Mobile Number': phoneNumber, 'Email': emailText});
 
       debugPrint(userCredential.toString());
       // This block will only execute if the sign-up was successful.
@@ -49,12 +53,73 @@ class SignUpViewModel extends ChangeNotifier {
             "The password is too weak. Please choose a stronger password.");
       } else {
         Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
-            "An error occurred during sign-up. Please try again later. ");
+            "An error occurred during sign-up. Please try again later.");
       }
     } catch (e) {
       setLoading(false);
       if (kDebugMode) {
         print("Error -- $e");
+      }
+      Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
+          "An unexpected error occurred. Please try again later.");
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> signUpWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      await googleSignIn.disconnect();
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser != null) {
+        setLoading(true);
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        // Create a new credential
+        final OAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+        debugPrint(userCredential.toString());
+
+        // Check if the user is new
+        if (userCredential.additionalUserInfo?.isNewUser == true) {
+          // Store additional user information in Firestore
+          await FirebaseFirestore.instance
+              .collection('Users')
+              .doc(userCredential.user?.uid)
+              .set({
+            'Name': googleUser.displayName,
+            'Email': googleUser.email,
+            // Add other fields as needed
+          });
+          final homeViewModel = Provider.of<HomeViewModel>(
+              appNavigatorKey.currentContext!,
+              listen: false);
+          homeViewModel.updateUser(googleUser.displayName!, googleUser.email);
+        }
+
+        // This block will only execute if the sign-in was successful.
+        Navigator.of(appNavigatorKey.currentContext!).pushAndRemoveUntil(
+            createHomeScreenRoute(), (Route<dynamic> route) => false);
+        setLoading(false);
+      }
+    } on FirebaseAuthException catch (error) {
+      setLoading(false);
+      if (error.code == 'account-exists-with-different-credential') {
+        Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
+            "The email is already in use with a different credential. Please sign in with a different credential.");
+      } else {
+        Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
+            "An error occurred during sign-up. Please try again later.");
+      }
+    } catch (e) {
+      setLoading(false);
+      if (kDebugMode) {
+        print(e);
       }
       Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
           "An unexpected error occurred. Please try again later.");
