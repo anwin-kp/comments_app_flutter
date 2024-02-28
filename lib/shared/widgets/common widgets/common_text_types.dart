@@ -10,12 +10,11 @@ class TextBold extends StatelessWidget {
   final bool isUnderLine;
 
   const TextBold(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.textColor,
       required this.fontSize,
-      required this.isUnderLine})
-      : super(key: key);
+      required this.isUnderLine});
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -41,12 +40,11 @@ class TextExtraBold extends StatelessWidget {
   final bool isUnderLine;
 
   const TextExtraBold(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.textColor,
       required this.fontSize,
-      required this.isUnderLine})
-      : super(key: key);
+      required this.isUnderLine});
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -73,13 +71,12 @@ class TextMedium extends StatelessWidget {
   final bool wantOverFlowEllipsis;
 
   const TextMedium(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.textColor,
       required this.fontSize,
       required this.isUnderLine,
-      required this.wantOverFlowEllipsis})
-      : super(key: key);
+      required this.wantOverFlowEllipsis});
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -105,12 +102,12 @@ class TextSmall extends StatelessWidget {
   final bool isUnderLine;
 
   const TextSmall({
-    Key? key,
+    super.key,
     required this.text,
     required this.textColor,
     required this.fontSize,
     required this.isUnderLine,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -136,12 +133,11 @@ class TextNormal extends StatelessWidget {
   final TextAlign? textAlign;
 
   const TextNormal(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.textColor,
       required this.fontSize,
-      this.textAlign})
-      : super(key: key);
+      this.textAlign});
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -167,12 +163,11 @@ class TextSemiBold extends StatelessWidget {
   final bool isUnderLine;
 
   const TextSemiBold(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.textColor,
       required this.fontSize,
-      required this.isUnderLine})
-      : super(key: key);
+      required this.isUnderLine});
   @override
   Widget build(BuildContext context) {
     return Text(

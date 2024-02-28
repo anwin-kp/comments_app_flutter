@@ -23,32 +23,37 @@ class LoginViewModel extends ChangeNotifier {
 
   Future<void> signIn(String emailText, String passwordText) async {
     setLoading(true);
-    try {
-      auth
-          .signInWithEmailAndPassword(email: emailText, password: passwordText)
-          .then((userCredential) {
-        // This block will only execute if the sign-in was successful.
-        Navigator.of(appNavigatorKey.currentContext!).pushAndRemoveUntil(
-            createHomeScreenRoute(), (Route<dynamic> route) => false);
-        setLoading(false);
-      }, onError: (error) {
-        // This block will execute if there was an error during sign-in.
-        setLoading(false);
-        if (error.code == 'too-many-requests') {
+    auth
+        .signInWithEmailAndPassword(email: emailText, password: passwordText)
+        .then((userCredential) {
+      // This block will only execute if the sign-in was successful.
+      Navigator.of(appNavigatorKey.currentContext!).pushAndRemoveUntil(
+          createHomeScreenRoute(), (Route<dynamic> route) => false);
+      setLoading(false);
+    }, onError: (error) {
+      setLoading(false);
+      if (error is FirebaseAuthException) {
+        if (error.code == 'user-not-found') {
+          Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
+              "No user found with this email. Please try again.");
+        } else if (error.code == 'wrong-password') {
+          Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
+              "Incorrect password. Please try again.");
+        } else if (error.code == 'too-many-requests') {
           Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
               "Too many requests. Please try again later.");
         } else if (error.code == 'invalid-credential') {
           Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
-              "The provided login details are invalid or expired.");
+              "The email or password is incorrect. Please try again.");
         } else {
-          Utility().showErrorSnackBar(
-              appNavigatorKey.currentContext!, error.code.toString());
+          Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
+              "An error occurred during sign-in. Please try again later.");
         }
-        throw Exception(error);
-      });
-    } catch (e) {
-      throw Exception(e);
-    }
+      } else {
+        Utility().showErrorSnackBar(appNavigatorKey.currentContext!,
+            "An unexpected error occurred. Please try again later.");
+      }
+    });
 
     notifyListeners();
   }

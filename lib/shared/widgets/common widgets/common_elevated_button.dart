@@ -11,12 +11,12 @@ class CommonButton extends StatelessWidget {
   final Color textColor;
 
   const CommonButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.backgroundColor = AppColors.kLiteBlueColor,
     this.textColor = AppColors.kColorWhite,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

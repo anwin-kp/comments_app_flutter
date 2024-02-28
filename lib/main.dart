@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_complete_demo_app/firebase_options.dart';
 import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,6 +23,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.instance;
+  firebaseAppCheck.activate(
+    androidProvider: AndroidProvider.debug,
+  );
+  // ignore: avoid_print
+  firebaseAppCheck.getToken().then((value) => print(value.toString()));
   LicenseRegistry.addLicense(() async* {
     final license =
         await rootBundle.loadString('assets/fonts/roboto/LICENSE.txt');

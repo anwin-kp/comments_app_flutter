@@ -15,14 +15,14 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType textInputType;
 
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     required this.hintText,
     this.validator,
     required this.textInputType,
     this.isPassword = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

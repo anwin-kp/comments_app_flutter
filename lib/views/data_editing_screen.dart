@@ -9,7 +9,7 @@ import '../shared/widgets/common widgets/common_edit_textfield.dart';
 import '../shared/widgets/common widgets/common_gradient_button.dart';
 
 class DataEditingPage extends StatefulWidget {
-  const DataEditingPage({Key? key}) : super(key: key);
+  const DataEditingPage({super.key});
 
   @override
   State<DataEditingPage> createState() => _DataEditingPageState();
