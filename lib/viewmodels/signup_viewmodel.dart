@@ -8,13 +8,15 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 import '../shared/helper/route.dart';
 import '../shared/helper/utility.dart';
-import 'home_viewmodel.dart';
+import 'login_viewmodel.dart';
 
 class SignUpViewModel extends ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
   late UserCredential userCredential;
   bool _loading = false;
-
+  final loginViewModel = Provider.of<LoginViewModel>(
+      appNavigatorKey.currentContext!,
+      listen: false);
   bool get loading => _loading;
 
   void setLoading(bool value) {
@@ -40,6 +42,8 @@ class SignUpViewModel extends ChangeNotifier {
 
       debugPrint(userCredential.toString());
       // This block will only execute if the sign-up was successful.
+      await loginViewModel.updateUserCredentials(userCredential);
+      await loginViewModel.retrieveData();
       Navigator.of(appNavigatorKey.currentContext!).pushAndRemoveUntil(
           createHomeScreenRoute(), (Route<dynamic> route) => false);
       setLoading(false);
@@ -69,8 +73,16 @@ class SignUpViewModel extends ChangeNotifier {
 
   Future<void> signUpWithGoogle() async {
     try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      await googleSignIn.disconnect();
+      try {
+        await GoogleSignIn().disconnect();
+        if (kDebugMode) {
+          print("G Account Disconnected Signup");
+        }
+      } catch (error) {
+        if (kDebugMode) {
+          print('Failed to disconnect Google Account: $error');
+        }
+      }
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       if (googleUser != null) {
         setLoading(true);
@@ -89,19 +101,16 @@ class SignUpViewModel extends ChangeNotifier {
         if (userCredential.additionalUserInfo?.isNewUser == true) {
           // Store additional user information in Firestore
           await FirebaseFirestore.instance
-              .collection('Users')
+              .collection('/Users')
               .doc(userCredential.user?.uid)
               .set({
             'Name': googleUser.displayName,
             'Email': googleUser.email,
             // Add other fields as needed
           });
-          final homeViewModel = Provider.of<HomeViewModel>(
-              appNavigatorKey.currentContext!,
-              listen: false);
-          homeViewModel.updateUser(googleUser.displayName!, googleUser.email);
         }
-
+        await loginViewModel.updateUserCredentials(userCredential);
+        await loginViewModel.retrieveData();
         // This block will only execute if the sign-in was successful.
         Navigator.of(appNavigatorKey.currentContext!).pushAndRemoveUntil(
             createHomeScreenRoute(), (Route<dynamic> route) => false);

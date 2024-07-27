@@ -11,6 +11,7 @@ import '../shared/widgets/common widgets/common_edit_textfield.dart';
 import '../shared/widgets/common widgets/common_elevated_button.dart';
 import '../shared/widgets/custom_divider_with_text.dart';
 import '../shared/widgets/custom_overlay_loader.dart';
+import '../shared/widgets/login_page_widgets.dart';
 import '../shared/widgets/secondary_button.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -24,11 +25,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _mobileNumController = TextEditingController();
-  final GlobalKey<FormState> _signupFormKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final Utility _utility = Utility();
+  final GlobalKey<FormState> _signupFormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<SignUpViewModel>(
@@ -55,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: SingleChildScrollView(
               child: Column(children: [
                 SizedBox(
-                  height: 180.h,
+                  height: 150.h,
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0.r),
@@ -132,6 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         CommonButton(
                           text: Constants.signUpText,
                           onPressed: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
                             if (_signupFormKey.currentState!.validate()) {
                               signUpViewModel.signUp(
                                 _emailController.text.trim(),
@@ -161,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: SecondaryButton(
                               height: 50.h,
                               textColor: AppColors.kGrey600,
-                              width: 220.w,
+                              width: 240.w,
                               onTap: () {
                                 signUpViewModel.signUpWithGoogle();
                               },
@@ -169,6 +172,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               bgColor: AppColors.kBackground.withOpacity(0.3),
                               text: Constants.continueWithGoogleText,
                               icons: AppImages.kGoogle),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          child: TermsAndPrivacyText(
+                            title1: Constants.privacyTitle1Text,
+                            title2: Constants.privacyTitle2Text,
+                            title3: Constants.privacyTitle3Text,
+                            title4: Constants.privacyTitle4Text,
+                          ),
                         ),
                       ],
                     ),

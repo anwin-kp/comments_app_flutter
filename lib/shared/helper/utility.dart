@@ -85,6 +85,21 @@ class Utility {
     }
   }
 
+  String getResetPasswordErrorMessageToShow(String errorCode) {
+    switch (errorCode) {
+      case 'user-not-found':
+        return 'No user found with this email.';
+      case 'invalid-email':
+        return 'The email address is not valid.';
+      case 'operation-not-allowed':
+        return 'Password reset is not allowed. Please contact support.';
+      case 'too-many-requests':
+        return 'We have blocked all requests from this device due to unusual activity. Try again later.';
+      default:
+        return 'An unexpected error occurred. Please try again later.';
+    }
+  }
+
   //FlushBar to show successful messages
   Flushbar showDoneFlushbar(String textToShow, BuildContext context) {
     return Flushbar(

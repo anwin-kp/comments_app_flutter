@@ -1,5 +1,3 @@
-import 'package:firebase_complete_demo_app/firebase_options.dart';
-import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import 'package:firebase_complete_demo_app/firebase_options.dart';
+import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 
 import 'shared/constants/constants.dart';
 import 'viewmodels/custom_text_field_view_model.dart';
@@ -19,10 +20,12 @@ import 'views/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv
+      .load(fileName: ".env")
+      .then((value) => debugPrint('ENV File Loaded'));
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  ).then((value) => debugPrint('Firebase initialized'));
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };

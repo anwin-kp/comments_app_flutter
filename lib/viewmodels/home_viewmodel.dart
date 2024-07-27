@@ -11,7 +11,7 @@ import '../shared/services/mqtt_repo.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final Utility _utility = Utility();
-  User _user = User(
+  final User _user = User(
       name: "Alexander",
       email: "Alexander@gmail.com",
       imageUrl: AppImages.userImage);

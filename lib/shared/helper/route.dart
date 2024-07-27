@@ -1,3 +1,4 @@
+import 'package:firebase_complete_demo_app/views/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:page_transition/page_transition.dart';
@@ -42,5 +43,14 @@ Route createEditScreenRoute() {
     alignment: Alignment.center,
     duration: const Duration(milliseconds: 1500),
     child: const DataEditingPage(),
+  );
+}
+
+Route createResetPasswordScreenRoute() {
+  return PageTransition(
+    type: PageTransitionType.scale,
+    alignment: Alignment.center,
+    duration: const Duration(milliseconds: 1500),
+    child: const ResetPasswordScreen(),
   );
 }

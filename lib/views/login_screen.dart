@@ -37,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+
     super.dispose();
   }
 
@@ -64,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 220.h,
+                          height: 300.h,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -103,7 +104,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     PrimaryTextButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          createResetPasswordScreenRoute(),
+                                        );
+                                      },
                                       title: Constants.forgotPasswordText,
                                       fontSize: 14,
                                     )
@@ -173,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: SecondaryButton(
                                       height: 50.h,
                                       textColor: AppColors.kGrey600,
-                                      width: 220.w,
+                                      width: 240.w,
                                       onTap: () {
                                         loginViewModel.signInWithGoogle();
                                       },
@@ -185,15 +191,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 SizedBox(
                                   height: 15.h,
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 40),
-                                  child: TermsAndPrivacyText(
-                                    title1: Constants.privacyTitle1Text,
-                                    title2: Constants.privacyTitle2Text,
-                                    title3: Constants.privacyTitle3Text,
-                                    title4: Constants.privacyTitle4Text,
-                                  ),
                                 ),
                               ],
                             ),
