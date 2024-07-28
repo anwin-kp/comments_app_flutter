@@ -24,7 +24,7 @@ class LoadingOverlay extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: SpinKitPouringHourGlass(
-                color: AppColors.kGoldColor,
+                color: AppColors.kCustomBlueColor,
                 strokeWidth: 2,
                 duration: Duration(milliseconds: 1000),
                 size: 60,

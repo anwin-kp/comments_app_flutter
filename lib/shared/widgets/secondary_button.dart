@@ -81,7 +81,7 @@ class _SecondaryButtonState extends State<SecondaryButton>
               Image.asset(widget.icons, width: 23.85, height: 23.04),
               const SizedBox(width: 12),
               Text(widget.text,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: AppColors.kColorWhite)

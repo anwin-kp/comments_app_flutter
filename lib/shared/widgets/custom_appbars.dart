@@ -1,3 +1,4 @@
+import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -13,20 +14,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      backgroundColor: AppColors.kCustomBlueColor,
       title: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.blueGrey,
+          color: AppColors.kWhite,
           fontFamily: "Roboto",
           letterSpacing: 1.5,
         ),
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.edit),
+          icon: const Icon(Icons.exit_to_app),
+          color: AppColors.kWhite,
           onPressed: onActionPressed,
         ),
       ],

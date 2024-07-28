@@ -13,18 +13,19 @@ dependencies:
   flutter_screenutil: ^5.9.0
   path_provider: ^2.1.2
   page_transition: ^2.1.0
-  mqtt_client: ^10.0.3
   another_flushbar: ^1.12.30
   flutter_spinkit: ^5.2.0
   google_fonts: ^6.1.0
   double_back_to_close_app: ^2.1.0
-  firebase_core: ^2.25.4
-  firebase_auth: ^4.17.5
+  firebase_core: ^3.2.0
+  firebase_auth: ^5.1.2
   flutter_dotenv: ^5.1.0
-  firebase_crashlytics: ^3.4.15
-  firebase_analytics: ^10.8.6
-  cloud_firestore: ^4.15.5
+  firebase_crashlytics: ^4.0.3
+  firebase_analytics: ^11.2.0
+  firebase_remote_config: ^5.0.3
+  cloud_firestore: ^5.1.0
   google_sign_in: ^6.2.1
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -37,15 +38,19 @@ flutter:
     - assets/images/
     - .env
     - assets/logos/
-    - assets/fonts/roboto/
+    - assets/fonts/poppins/
   fonts:
-    - family: Roboto
+    - family: Poppins
       fonts:
-        - asset: assets/fonts/roboto/Roboto-Light.ttf
+        - asset: assets/fonts/poppins/Poppins-Light.ttf
           weight: 300
-        - asset: assets/fonts/roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
           weight: 400
-        - asset: assets/fonts/roboto/Roboto-Medium.ttf
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
           weight: 500
-        - asset: assets/fonts/roboto/Roboto-Bold.ttf
-          weight: 700 
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
+          weight: 800

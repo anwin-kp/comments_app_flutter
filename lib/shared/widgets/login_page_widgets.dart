@@ -88,7 +88,7 @@ class PrimaryTextButton extends StatelessWidget {
         text: title,
         fontSize: fontSize.sp,
         isUnderLine: false,
-        textColor: AppColors.kColorBlack,
+        textColor: AppColors.kLiteBlueColor,
         wantOverFlowEllipsis: false,
       ),
     );

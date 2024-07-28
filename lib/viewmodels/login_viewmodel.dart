@@ -9,7 +9,7 @@ import 'package:firebase_complete_demo_app/shared/helper/route.dart';
 
 import '../main.dart';
 import '../shared/helper/utility.dart';
-import 'home_viewmodel.dart';
+import 'homescreen_viewmodel.dart';
 
 class LoginViewModel extends ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -40,13 +40,13 @@ class LoginViewModel extends ChangeNotifier {
     auth
         .signInWithEmailAndPassword(email: emailText, password: passwordText)
         .then((userCredential) async {
+      await updateUserCredentials(userCredential);
       await retrieveData();
 
       // This block will only execute if the sign-in was successful.
       Navigator.of(appNavigatorKey.currentContext!).pushAndRemoveUntil(
           createHomeScreenRoute(), (Route<dynamic> route) => false);
       setLoading(false);
-      await updateUserCredentials(userCredential);
     }, onError: (error) {
       setLoading(false);
       String errorMessage;
@@ -119,6 +119,18 @@ class LoginViewModel extends ChangeNotifier {
         );
         final UserCredential userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
+        // Check if the user is new
+        if (userCredential.additionalUserInfo?.isNewUser == true) {
+          // Store additional user information in Firestore
+          await FirebaseFirestore.instance
+              .collection('/Users')
+              .doc(userCredential.user?.uid)
+              .set({
+            'Name': googleUser.displayName,
+            'Email': googleUser.email,
+            // Add other fields as needed
+          });
+        }
         await updateUserCredentials(userCredential);
         await retrieveData();
         debugPrint(userCredential.toString());

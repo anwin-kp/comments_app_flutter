@@ -42,6 +42,15 @@ class Utility {
     return null;
   }
 
+  String? validateLoginPassword(String value) {
+    if (value.isEmpty) {
+      return 'Please enter password';
+    } else if (value.length < 8) {
+      return 'Please enter a valid password';
+    }
+    return null;
+  }
+
   String? validateConfirmPassword(String value, String originalPassword) {
     if (value.isEmpty) {
       return 'Please confirm your password';

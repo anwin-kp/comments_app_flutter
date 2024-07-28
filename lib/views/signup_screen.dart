@@ -24,7 +24,6 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _mobileNumController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
@@ -91,16 +90,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        CustomTextFormField(
-                          controller: _mobileNumController,
-                          textInputType: TextInputType.phone,
-                          isPassword: false,
-                          labelText: Constants.phoneNumberText,
-                          hintText: Constants.enterPhoneNumberText,
-                          validator: (value) {
-                            return _utility.validateMobile(value!);
-                          },
-                        ),
                         SizedBox(
                           height: 10.h,
                         ),
@@ -137,11 +126,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             FocusManager.instance.primaryFocus?.unfocus();
                             if (_signupFormKey.currentState!.validate()) {
                               signUpViewModel.signUp(
-                                _emailController.text.trim(),
-                                _confirmPasswordController.text.trim(),
-                                _nameController.text.trim(),
-                                int.parse(_mobileNumController.text),
-                              );
+                                  _emailController.text.trim(),
+                                  _confirmPasswordController.text.trim(),
+                                  _nameController.text.trim());
                             }
                           },
                           backgroundColor: AppColors.kLiteBlueColor,

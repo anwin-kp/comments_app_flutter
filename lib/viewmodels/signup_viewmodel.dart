@@ -24,8 +24,11 @@ class SignUpViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signUp(String emailText, String passwordText, String name,
-      int phoneNumber) async {
+  Future<void> signUp(
+    String emailText,
+    String passwordText,
+    String name,
+  ) async {
     setLoading(true);
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
@@ -37,8 +40,7 @@ class SignUpViewModel extends ChangeNotifier {
       await FirebaseFirestore.instance
           .collection('/Users')
           .doc(userCredential.user?.uid)
-          .set(
-              {'Name': name, 'Mobile Number': phoneNumber, 'Email': emailText});
+          .set({'Name': name, 'Email': emailText});
 
       debugPrint(userCredential.toString());
       // This block will only execute if the sign-up was successful.

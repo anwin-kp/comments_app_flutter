@@ -1,195 +1,71 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+import 'package:firebase_complete_demo_app/shared/widgets/common%20widgets/common_text_types.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
+import '../shared/constants/colors.dart';
 import '../shared/constants/constants.dart';
-import '../shared/helper/route.dart';
-import '../shared/services/mqtt_repo.dart';
-import '../viewmodels/dependency_change_view_model.dart';
-import '../viewmodels/home_viewmodel.dart';
+import '../shared/widgets/comments_card.dart';
+import '../shared/widgets/custom_alerts.dart';
 import '../shared/widgets/custom_appbars.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    super.key,
-  });
+import '../shared/widgets/custom_overlay_loader.dart';
+import '../viewmodels/homescreen_viewmodel.dart';
+import '../viewmodels/logout_viewmodel.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      MqttRepository().initializeMQTTClient();
+      Provider.of<HomeViewModel>(context, listen: false).fetchComments();
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<HomeViewModel, LifecycleHandler>(
-      builder: (context, homeViewModel, lifecycleHandler, child) {
+    return Consumer2<SignOutViewModel, HomeViewModel>(
+      builder: (context, signOutViewModel, homeViewModel, child) {
         return Scaffold(
+          backgroundColor: AppColors.kColorAsh,
           appBar: CustomAppBar(
-            title: Constants.homeTitleText,
+            title: Constants.commentsText,
             onActionPressed: () {
-              Navigator.push(
+              showLogoutConfirmationDialog(
                 context,
-                createEditScreenRoute(),
+                () {
+                  signOutViewModel.signOut();
+                },
               );
             },
           ),
-          body: SingleChildScrollView(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        CircleAvatar(
-                          backgroundImage:
-                              AssetImage(homeViewModel.user.imageUrl),
-                          radius: 50,
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          homeViewModel.user.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          homeViewModel.user.email,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: Colors.grey[600]),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          Constants.statusText,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          Constants.updatesStatusCountText,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: Colors.grey[600]),
-                        ),
-                        Text(
-                          homeViewModel.counter.toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          Constants.recentActivityText,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.grey[200],
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    const Row(
-                                      children: <Widget>[
-                                        Icon(Icons.check, color: Colors.green),
-                                        SizedBox(width: 10),
-                                        Text(Constants.taskCompletedCapsText),
-                                      ],
-                                    ),
-                                    Text(
-                                        '${homeViewModel.mqttResponse.taskCompleted} ${Constants.minsAgoText}'),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    const Row(
-                                      children: <Widget>[
-                                        Icon(Icons.error, color: Colors.red),
-                                        SizedBox(width: 10),
-                                        Text(Constants.taskFailedCapsText),
-                                      ],
-                                    ),
-                                    Text(
-                                        '${homeViewModel.mqttResponse.taskFailed} ${Constants.minsAgoText}'),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    const Row(
-                                      children: <Widget>[
-                                        Icon(Icons.warning,
-                                            color: Colors.yellow),
-                                        SizedBox(width: 10),
-                                        Text(Constants.taskInProgressCapsText),
-                                      ],
-                                    ),
-                                    Text(
-                                        '${homeViewModel.mqttResponse.taskInprogress} ${Constants.hourAgoText}'),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ]),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              homeViewModel.incrementCounter();
-            },
-            tooltip: Constants.incrementText,
-            child: const Icon(Icons.add),
+          body: DoubleBackToCloseApp(
+            snackBar: const SnackBar(
+              content: TextMedium(
+                text: Constants.backButtonWarningText,
+                fontSize: 14,
+                isUnderLine: false,
+                textColor: AppColors.kColorWhite,
+                wantOverFlowEllipsis: false,
+              ),
+            ),
+            child: LoadingOverlay(
+              isLoading: homeViewModel.isLoading,
+              child: ListView.builder(
+                itemCount: homeViewModel.comments.length,
+                itemBuilder: (context, index) {
+                  final comment = homeViewModel.comments[index];
+                  return CommentCard(comment);
+                },
+              ),
+            ),
           ),
         );
       },

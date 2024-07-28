@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelText: Constants.passwordText,
                                   hintText: Constants.enterPasswordText,
                                   validator: (value) {
-                                    return _utility.validatePassword(value!);
+                                    return _utility.validateLoginPassword(value!);
                                   },
                                 ),
                                 SizedBox(
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           _passwordController.text.trim());
                                     }
                                   },
-                                  backgroundColor: AppColors.kLiteBlueColor,
+                                  backgroundColor: AppColors.kCustomBlueColor,
                                   textColor: AppColors.kColorWhite,
                                 ),
                                 SizedBox(
@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 RichText(
                                   text: TextSpan(
                                     text: Constants.dontHaveAnAccountText,
-                                    style: GoogleFonts.roboto(
+                                    style: GoogleFonts.poppins(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w700,
                                         color: AppColors.kGrey600),
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               createSignupScreenRoute(),
                                             );
                                           },
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.poppins(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w700,
                                             color: AppColors.kLiteBlueColor),

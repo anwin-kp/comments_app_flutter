@@ -5,7 +5,10 @@ class AppColors {
 //This class contains the Color static constants
   static const Color kColorLightNavy = Color(0xff132e60);
   static const Color kColorLightBlue = Color(0xff009ee0);
+  static const Color kCustomBlueColor = Color.fromARGB(255, 12, 84, 190);
+  static const Color kCustomLightBlueColor = Color(0xFFF5F9FD);
   static const Color kBlueButtonColor = Color.fromARGB(255, 68, 124, 220);
+  static const Color kColorAsh = Color.fromARGB(255, 206, 211, 220);
   static const Color kColorWhite = Color.fromARGB(255, 255, 255, 255);
   static const Color kColorBlack = Color.fromARGB(255, 0, 0, 0);
   static const Color kColorRed = Color.fromARGB(255, 255, 0, 0);

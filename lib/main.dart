@@ -1,20 +1,19 @@
+import 'package:firebase_complete_demo_app/firebase_options.dart';
+import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import 'package:firebase_complete_demo_app/firebase_options.dart';
-import 'package:firebase_complete_demo_app/shared/constants/colors.dart';
-
 import 'shared/constants/constants.dart';
 import 'viewmodels/custom_text_field_view_model.dart';
-import 'viewmodels/dependency_change_view_model.dart';
-import 'viewmodels/home_viewmodel.dart';
+import 'viewmodels/homescreen_viewmodel.dart';
 import 'viewmodels/login_viewmodel.dart';
+import 'viewmodels/logout_viewmodel.dart';
+import 'viewmodels/reset_password_viewmodel.dart';
 import 'viewmodels/signup_viewmodel.dart';
 import 'views/splash_screen.dart';
 
@@ -34,11 +33,6 @@ Future<void> main() async {
     return true;
   };
 
-  LicenseRegistry.addLicense(() async* {
-    final license =
-        await rootBundle.loadString('assets/fonts/roboto/LICENSE.txt');
-    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
-  });
   runApp(const MyApp());
 }
 
@@ -58,9 +52,6 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<HomeViewModel>(
             create: (_) => HomeViewModel(),
           ),
-          ChangeNotifierProvider<LifecycleHandler>(
-            create: (_) => LifecycleHandler(),
-          ),
           ChangeNotifierProvider<TextFieldProvider>(
             create: (_) => TextFieldProvider(),
           ),
@@ -69,6 +60,12 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider<SignUpViewModel>(
             create: (_) => SignUpViewModel(),
+          ),
+          ChangeNotifierProvider<ResetPasswordViewModel>(
+            create: (_) => ResetPasswordViewModel(),
+          ),
+          ChangeNotifierProvider<SignOutViewModel>(
+            create: (_) => SignOutViewModel(),
           ),
         ],
         child: MaterialApp(

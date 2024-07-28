@@ -8,6 +8,7 @@ import '../shared/constants/constants.dart';
 import '../shared/helper/utility.dart';
 import '../shared/widgets/common widgets/common_edit_textfield.dart';
 import '../shared/widgets/common widgets/common_elevated_button.dart';
+import '../shared/widgets/common widgets/common_text_types.dart';
 import '../shared/widgets/custom_overlay_loader.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -27,6 +28,21 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return Consumer<ResetPasswordViewModel>(
         builder: (context, resetPasswordViewModel, child) {
       return Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.kCustomBlueColor,
+          elevation: 2,
+          iconTheme: const IconThemeData(
+            color: AppColors.kColorWhite,
+          ),
+          centerTitle: true,
+          title: TextMedium(
+            text: Constants.resetPasswordText,
+            textColor: AppColors.kColorWhite,
+            fontSize: 22.sp,
+            isUnderLine: false,
+            wantOverFlowEllipsis: false,
+          ),
+        ),
         resizeToAvoidBottomInset: true,
         extendBody: false,
         extendBodyBehindAppBar: false,
@@ -36,6 +52,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: SafeArea(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: EdgeInsets.all(10.r),
@@ -57,7 +74,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             height: 20.h,
                           ),
                           CommonButton(
-                            text: Constants.signUpText,
+                            text: Constants.submitText,
                             onPressed: () {
                               FocusManager.instance.primaryFocus?.unfocus();
                               if (_resetPasswordFormKey.currentState!
@@ -67,7 +84,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 );
                               }
                             },
-                            backgroundColor: AppColors.kLiteBlueColor,
+                            backgroundColor: AppColors.kCustomBlueColor,
                             textColor: AppColors.kColorWhite,
                           ),
                         ],
