@@ -57,6 +57,7 @@ class CustomTextFormField extends StatelessWidget {
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 errorStyle: Constants.errorTextStyle,
+                errorMaxLines: 2,
                 focusedBorder: Constants.focusedInputBorder,
                 enabledBorder: Constants.enabledInputBorder,
                 errorBorder: Constants.errorInputBorder,

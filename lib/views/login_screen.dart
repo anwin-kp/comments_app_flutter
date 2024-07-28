@@ -49,6 +49,18 @@ class _LoginScreenState extends State<LoginScreen> {
           resizeToAvoidBottomInset: true,
           extendBody: false,
           extendBodyBehindAppBar: false,
+          appBar: AppBar(
+            backgroundColor: AppColors.kCustomBlueColor,
+            elevation: 2,
+            centerTitle: true,
+            title: TextMedium(
+              text: Constants.commentsText,
+              textColor: AppColors.kColorWhite,
+              fontSize: 22.sp,
+              isUnderLine: false,
+              wantOverFlowEllipsis: false,
+            ),
+          ),
           body: LoadingOverlay(
             isLoading: loginViewModel.loading,
             child: DoubleBackToCloseApp(
@@ -65,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 300.h,
+                          height: 240.h,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -94,7 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelText: Constants.passwordText,
                                   hintText: Constants.enterPasswordText,
                                   validator: (value) {
-                                    return _utility.validateLoginPassword(value!);
+                                    return _utility
+                                        .validateLoginPassword(value!);
                                   },
                                 ),
                                 SizedBox(

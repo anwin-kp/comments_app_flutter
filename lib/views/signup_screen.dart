@@ -9,6 +9,7 @@ import '../shared/helper/app_images.dart';
 import '../shared/helper/utility.dart';
 import '../shared/widgets/common widgets/common_edit_textfield.dart';
 import '../shared/widgets/common widgets/common_elevated_button.dart';
+import '../shared/widgets/common widgets/common_text_types.dart';
 import '../shared/widgets/custom_divider_with_text.dart';
 import '../shared/widgets/custom_overlay_loader.dart';
 import '../shared/widgets/login_page_widgets.dart';
@@ -35,16 +36,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Consumer<SignUpViewModel>(
         builder: (context, signUpViewModel, child) {
       return Scaffold(
-        floatingActionButton: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+        appBar: AppBar(
+          backgroundColor: AppColors.kCustomBlueColor,
+          elevation: 2,
+          iconTheme: const IconThemeData(
+            color: AppColors.kColorWhite,
+          ),
+          centerTitle: true,
+          title: TextMedium(
+            text: Constants.commentsText,
+            textColor: AppColors.kColorWhite,
+            fontSize: 22.sp,
+            isUnderLine: false,
+            wantOverFlowEllipsis: false,
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
         resizeToAvoidBottomInset: true,
         extendBody: false,
         extendBodyBehindAppBar: false,
@@ -56,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: SingleChildScrollView(
               child: Column(children: [
                 SizedBox(
-                  height: 150.h,
+                  height: 120.h,
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0.r),
@@ -86,9 +92,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: (value) {
                             return _utility.validateEmail(value!);
                           },
-                        ),
-                        SizedBox(
-                          height: 10.h,
                         ),
                         SizedBox(
                           height: 10.h,
