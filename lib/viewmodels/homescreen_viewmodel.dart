@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/comments_model.dart';
@@ -14,6 +16,7 @@ class HomeViewModel extends ChangeNotifier {
     email: "",
     name: "",
   );
+  late bool _showFullEmail;
   User get user => _user;
   bool get isLoading => _isLoading;
 
@@ -31,6 +34,42 @@ class HomeViewModel extends ChangeNotifier {
   final List<CommentsModel> _comments = [];
   List<CommentsModel> get comments => _comments;
 
+  Future<void> initializeRemoteConfig() async {
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    if (kDebugMode) {
+      print("initializeRemoteConfig Done ");
+    }
+    try {
+      await remoteConfig.setDefaults(<String, dynamic>{
+        'showFullEmail': false,
+      });
+
+      await remoteConfig.fetchAndActivate();
+
+      // Prioritize fetched value over default
+      _showFullEmail = remoteConfig.getBool('showFullEmail');
+      if (kDebugMode) {
+        print("showFullEmail : $_showFullEmail");
+      }
+      notifyListeners();
+    } catch (e) {
+      FirebaseCrashlytics.instance.recordError(e, null);
+    }
+  }
+
+  String _getMaskedEmail(String email) {
+    if (_showFullEmail) {
+      return email;
+    } else {
+      int atIndex = email.indexOf('@');
+      if (atIndex > 3) {
+        return '${email.substring(0, 3)}****${email.substring(atIndex)}';
+      } else {
+        return '${email.substring(0, atIndex)}****${email.substring(atIndex)}';
+      }
+    }
+  }
+
   Future<void> clearComments() async {
     _comments.clear();
     notifyListeners();
@@ -40,6 +79,8 @@ class HomeViewModel extends ChangeNotifier {
     setIsLoading(true);
 
     try {
+      await initializeRemoteConfig();
+
       final apiServices = ApiServices();
       final response =
           await apiServices.getCommentsRequest(Constants.kCommentsUrl);
@@ -47,8 +88,16 @@ class HomeViewModel extends ChangeNotifier {
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         _comments.clear();
-        _comments
-            .addAll(data.map((json) => CommentsModel.fromJson(json)).toList());
+        _comments.addAll(data.map((json) {
+          final comment = CommentsModel.fromJson(json);
+          return CommentsModel(
+            postId: comment.postId,
+            id: comment.id,
+            name: comment.name,
+            email: _getMaskedEmail(comment.email!),
+            body: comment.body,
+          );
+        }).toList());
       } else {
         // Handle non-200 status codes
         throw Exception('Failed to load comments: ${response.statusCode}');
@@ -57,17 +106,8 @@ class HomeViewModel extends ChangeNotifier {
       FirebaseCrashlytics.instance.recordError(exception, stackTrace);
       // Optionally show an error message to the user
     } finally {
+      notifyListeners();
       setIsLoading(false);
     }
-  }
-
-  void addComment(CommentsModel comment) {
-    _comments.add(comment);
-    notifyListeners();
-  }
-
-  void removeComment(CommentsModel comment) {
-    _comments.remove(comment);
-    notifyListeners();
   }
 }
