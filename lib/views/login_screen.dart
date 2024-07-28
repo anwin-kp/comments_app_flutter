@@ -134,6 +134,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 CommonButton(
                                   text: Constants.loginText,
                                   onPressed: () {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
                                     if (_loginFormKey.currentState!
                                         .validate()) {
                                       loginViewModel.signIn(
