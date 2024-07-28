@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     return Consumer2<SignOutViewModel, HomeViewModel>(
       builder: (context, signOutViewModel, homeViewModel, child) {
         return Scaffold(
-          backgroundColor: AppColors.kColorAsh,
+          backgroundColor: AppColors.kColorWhite,
           appBar: CustomAppBar(
             title: Constants.commentsText,
             onActionPressed: () {
