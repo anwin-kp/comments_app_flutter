@@ -40,7 +40,7 @@ class HomeViewModel extends ChangeNotifier {
     }
     try {
       await remoteConfig.setDefaults(<String, dynamic>{
-        'showFullEmail': false,
+        'showFullEmail': true,
       });
 
       await remoteConfig.fetchAndActivate();

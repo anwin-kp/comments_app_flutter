@@ -29,8 +29,8 @@ class CommonTextStyles {
 
   //Button Styles
   static ButtonStyle kCommonCancelButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(AppColors.kColorRed),
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    backgroundColor: WidgetStateProperty.all<Color>(AppColors.kColorRed),
+    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius:
             BorderRadius.circular(18.0), // replace with your desired radius
@@ -39,8 +39,8 @@ class CommonTextStyles {
   );
   static ButtonStyle kCommonOKButtonStyle = ButtonStyle(
     backgroundColor:
-        MaterialStateProperty.all<Color>(AppColors.kBlueButtonColor),
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        WidgetStateProperty.all<Color>(AppColors.kBlueButtonColor),
+    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius:
             BorderRadius.circular(18.0), // replace with your desired radius
