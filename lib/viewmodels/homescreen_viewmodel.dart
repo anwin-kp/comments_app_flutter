@@ -15,7 +15,7 @@ class HomeViewModel extends ChangeNotifier {
     email: "",
     name: "",
   );
-  late bool _showFullEmail = false;
+  late bool _showFullEmail = true;
   User get user => _user;
   bool get isLoading => _isLoading;
 

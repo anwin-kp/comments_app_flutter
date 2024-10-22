@@ -22,7 +22,7 @@ class Constants {
   static const String dontHaveAnAccountText = 'Don’t have an account? ';
   static const String privacyTitle1Text = '  By signing up you agree to our';
   static const String privacyTitle2Text = ' Terms ';
-  static const String privacyTitle3Text = '  and';
+  static const String privacyTitle3Text = ' and';
   static const String privacyTitle4Text = ' Conditions of Use';
   static const String resetPasswordText = 'Reset Password';
 
