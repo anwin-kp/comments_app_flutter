@@ -48,6 +48,8 @@ class SignOutViewModel extends ChangeNotifier {
       await Provider.of<HomeViewModel>(appNavigatorKey.currentContext!,
               listen: false)
           .clearComments();
+      Provider.of<HomeViewModel>(appNavigatorKey.currentContext!, listen: false)
+          .clearSelectedImage();
       // Navigate to the login screen
       Navigator.of(appNavigatorKey.currentContext!).pushAndRemoveUntil(
           createLoginScreenRoute(), (Route<dynamic> route) => false);
